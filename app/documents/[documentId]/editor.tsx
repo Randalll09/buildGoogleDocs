@@ -4,9 +4,20 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
+import { Table } from "@tiptap/extension-table";
+import { TableCell } from "@tiptap/extension-table-cell";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { Image } from "@tiptap/extension-image";
+import ImageResize from "tiptap-extension-resize-image";
+import { useEditorStore } from "@/store/use-editor-store";
 
 export const Editor = () => {
+  const { setEditor } = useEditorStore();
   const editor = useEditor({
+    onCreate({ editor }) {
+      setEditor(editor);
+    },
     editorProps: {
       attributes: {
         //style attr is for dynamic styling
@@ -18,12 +29,18 @@ export const Editor = () => {
     },
     extensions: [
       StarterKit,
+      Image,
+      ImageResize,
+      Table,
+      TableCell,
+      TableHeader,
+      TableRow,
       TaskList,
       TaskItem.configure({
         nested: true,
       }),
     ],
-    content: "<p>Hello World! 🌎️</p>",
+    content: ``,
   });
 
   return (
