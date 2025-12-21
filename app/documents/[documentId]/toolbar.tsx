@@ -3,10 +3,15 @@
 import { cn } from "@/lib/utils";
 import {
   BoldIcon,
+  ItalicIcon,
+  ListTodoIcon,
   LucideIcon,
+  MessageSquarePlusIcon,
   PrinterIcon,
   Redo2Icon,
+  RemoveFormattingIcon,
   SpellCheckIcon,
+  UnderlineIcon,
   Undo2Icon,
 } from "lucide-react";
 import { useEditorStore } from "@/store/use-editor-store";
@@ -23,7 +28,7 @@ const ToolBarButton = ({ onClick, isActive, icon: Icon }: ToolbarPops) => {
     <button
       onClick={onClick}
       className={cn(
-        "text-sm h-7 min-w-7 flex-center items-center justify-center rounded-sm hover:bg-neutral-200/80",
+        "text-sm h-7 min-w-7 flex  items-center justify-center rounded-sm hover:bg-neutral-200/80",
         isActive && "bg-neutral-200/80"
       )}>
       <Icon />
@@ -72,24 +77,65 @@ export const Toolbar = () => {
         label: "bold",
         icon: BoldIcon,
         onClick: () => editor?.chain().focus().toggleBold().run(),
+        isActive: editor?.isActive("bold"),
+      },
+      {
+        label: "italic",
+        icon: ItalicIcon,
+        onClick: () => editor?.chain().focus().toggleItalic().run(),
+        isActive: editor?.isActive("italic"),
+      },
+      {
+        label: "underline",
+        icon: UnderlineIcon,
+        onClick: () => editor?.chain().focus().toggleUnderline().run(),
+        isActive: editor?.isActive("underline"),
+      },
+    ],
+    [
+      {
+        label: "Comments",
+        icon: MessageSquarePlusIcon,
+        onClick: () => console.log("comments add"),
+      },
+      {
+        label: "ListTodo",
+        icon: ListTodoIcon,
+        onClick: () => editor?.chain().focus().toggleTaskList().run(),
+        isActive: editor?.isActive("taskList"),
+      },
+      {
+        label: "RemoveFormatting",
+        icon: RemoveFormattingIcon,
+        onClick: () => editor?.chain().focus().unsetAllMarks().run(),
       },
     ],
   ];
   return (
-    <div className="bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0 ">
+    <div className="bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 ">
       {sections[0].map((item) => (
         <ToolBarButton key={item.label} {...item} />
       ))}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-      {sections[0].map((item) => (
+      {/* TODO:FontFamily */}
+      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      {/* TODO:HEading */}
+      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      {/* TODO:FontSize */}
+      <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+      {sections[1].map((item) => (
         <ToolBarButton key={item.label} {...item} />
       ))}
+      {/* TODO:TextColor */}
+      {/* TODO:HighlightColor */}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-      {sections[0].map((item) => (
-        <ToolBarButton key={item.label} {...item} />
-      ))}
+      {/* TODO:Link */}
+      {/* TODO:Image */}
+      {/* TODO:Align */}
+      {/* TODO:Line Height */}
+      {/* TODO:List */}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-      {sections[0].map((item) => (
+      {sections[2].map((item) => (
         <ToolBarButton key={item.label} {...item} />
       ))}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
