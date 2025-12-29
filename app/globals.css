@@ -88,6 +88,13 @@ body {
 }
 
 .tiptap {
+  a {
+    @apply text-purple-600;
+    cursor: pointer;
+    &:hover {
+      @apply underline;
+    }
+  }
   h1,
   h2,
   h3,
