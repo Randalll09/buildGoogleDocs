@@ -26,12 +26,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import type { Level } from "@tiptap/extension-heading";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import {
   Dialog,
   DialogContent,
@@ -83,13 +83,13 @@ const ImageButton = () => {
             <ImageIcon className="size-4" />
           </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="p-2.5 flex items-center gap-x-2">
+        <DropdownMenuContent className="p-2.5 ">
           <DropdownMenuItem onClick={onUpload}>
             <UploadIcon className="size-4 mr-2" />
             Upload
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
-            <SearchIcon className="size-4 mr-2" />
+            <SearchIcon className="size-4 mr-2 " />
             Paste image URL
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -109,10 +109,10 @@ const ImageButton = () => {
               }
             }}
           />
+          <DialogFooter>
+            <Button onClick={handleImageURLSubmit}>Insert</Button>
+          </DialogFooter>
         </DialogContent>
-        <DialogFooter>
-          <Button onClick={handleImageURLSubmit}>Insert</Button>
-        </DialogFooter>
       </Dialog>
     </>
   );
@@ -421,7 +421,7 @@ export const Toolbar = () => {
       <HighlightColorButton />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       <LinkButton />
-      {/* TODO:Image */}
+      <ImageButton />
       {/* TODO:Align */}
       {/* TODO:Line Height */}
       {/* TODO:List */}
