@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { Navbar } from "./navbar";
+import { TemplatesGallery } from "./templates-gallery";
 
 const Home = () => {
   return (
@@ -8,7 +9,8 @@ const Home = () => {
       <div className="fixed top-0 left-0 right-0 z-100 h-16 p-4 bg-white">
         <Navbar />
       </div>
-      <div className="-scroll-mt-16">
+      <div className="mt-16">
+        <TemplatesGallery />
         <p>Hello</p>
         <Link className="underline text-blue-500" href={"/documents/123"}>
           CLick to Doc Id
