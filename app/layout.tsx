@@ -1,5 +1,7 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import "@liveblocks/react-tiptap/styles.css";
+import "@liveblocks/react-ui/styles.css";
+import type { Metadata } from "next";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "@/components/ui/sonner";
 
