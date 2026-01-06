@@ -14,44 +14,24 @@ export async function POST(req: Request) {
   if (!sessionClaims) {
     return new Response("Unauthorized", { status: 401 });
   }
-  console.log("Session claims:", sessionClaims);
   const user = await currentUser();
   if (!user) {
     return new Response("Unauthorized", { status: 401 });
   }
   const { room } = await req.json();
-  console.log("Room ID:", room);
   const document = await convex.query(api.documents.getById, { id: room });
-  console.log("Document:", document);
   if (!document) {
     return new Response("Unauthorized", { status: 404 });
   }
 
   const isOwner = document.ownerId === user.id;
-  console.log(
-    "Is Owner:",
-    isOwner,
-    "document.ownerId:",
-    document.ownerId,
-    "user.id:",
-    user.id
-  );
 
   const organizationId = sessionClaims.org_id || sessionClaims.o?.id;
   const isOrganizationMember = !!(
     document.organizationId && document.organizationId === organizationId
   );
-  console.log(
-    "Is Organization Member:",
-    isOrganizationMember,
-    "document.organizationId:",
-    document.organizationId,
-    "organizationId:",
-    organizationId
-  );
 
   if (!isOwner && !isOrganizationMember) {
-    console.log("Access denied: not owner and not organization member");
     return new Response("Unauthorized", { status: 401 });
   }
 
