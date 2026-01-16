@@ -23,9 +23,13 @@ import { LineHeightExtension } from "@/extensions/line-height";
 import { Ruler } from "./ruler";
 import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
 import { Threads } from "./Threads";
+import { useStorage } from "@liveblocks/react";
 
 export const Editor = () => {
+  const leftMargin = useStorage((root) => root.leftMargin);
+  const rightMargin = useStorage((root) => root.rightMargin);
   const liveblocks = useLiveblocksExtension();
+
   const { setEditor } = useEditorStore();
   const editor = useEditor({
     immediatelyRender: false,
@@ -57,7 +61,7 @@ export const Editor = () => {
     editorProps: {
       attributes: {
         //style attr is for dynamic styling
-        style: "padding-left:56px; padding-right:56px",
+        style: `padding-left:${leftMargin ?? 56}px; padding-right:${rightMargin ?? 56}px`,
         //class attr is for fixed styling
         class:
           "focus:outline-none print:border-0 border bg-white border-[#c7c7c7] w-[816px] flex flex-col min-h-[1054px] pt-10 pr-14 pb-10 cursor-text",

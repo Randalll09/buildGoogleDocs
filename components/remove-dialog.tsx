@@ -48,6 +48,7 @@ export const RemoveDialog = ({ documentId, children }: RemoveDialogProps) => {
               setIsRemoving(true);
               remove({ id: documentId })
                 .then(() => {
+                  window.location.href = "/";
                   toast.success("Document deleted.");
                 })
                 .catch(() => {
